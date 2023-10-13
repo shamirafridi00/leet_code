@@ -1,25 +1,37 @@
+=begin
+
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Example 2:
+
+Input: strs = [""]
+Output: [[""]]
+Example 3:
+
+Input: strs = ["a"]
+Output: [["a"]]
+
+=end
+
+
+
 def group_anagrams(strs)
-  anagram_hash = {}
+  anagrams = Hash.new { |h, k| h[k] = [] }
 
   strs.each do |word|
-    # Sort the word to use it as a key in the hash
     sorted_word = word.chars.sort.join
-    puts sorted_word
-
-    # Check if the sorted word is already a key in the hash
-    if anagram_hash.key?(sorted_word)
-      # If it is, add the word to the existing group
-      anagram_hash[sorted_word] << word
-      puts anagram_hash
-    else
-      # If not, create a new group with the sorted word as the key
-      anagram_hash[sorted_word] = [word]
-      puts anagram_hash
-    end
+    anagrams[sorted_word] << word
   end
 
-  # Convert the hash values to an array to get the final result
-  result = anagram_hash.values
+  anagrams.values
 end
 
 # Example usage:
